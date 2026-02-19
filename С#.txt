@@ -1,0 +1,1 @@
+No line break before opening brace. (Нет переноса строки перед открывающей скобкой)
