@@ -1,1 +1,13 @@
 No line break before opening brace. (Нет переноса строки перед открывающей скобкой)
+
+Indentation of 2 spaces, no tabs. (Отступ в 2 пробела, без таба)
+
+Names of classes, methods, enumerations, public fields, public properties, namespaces: PascalCase. (Имена классов, методов и тд и тп пишутся с помощью PascalCase)
+
+Names of local variables, parameters: camelCase. (Имена локальных переменных, параметров пишутся с помощью camelCase)
+
+Names of private, protected, internal and protected internal fields and properties: _camelCase. (Приватный и тд и тп _camelCase)
+
+For single line read-only properties, prefer expression body properties (=>) when possible. (Если свойство только для чтения, использовать стрелочку)
+
+For everything else, use the older { get; set; } syntax. (Для остального, использовать get и set)
