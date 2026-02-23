@@ -1,13 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace C_Sharp_var_10{
+﻿namespace C_Sharp_var_10{
   public static class Logger{
-    private static readonly string _path = Constants.LogPath;
+    private static string _path => Constants.LogPath;
     public static void Init(bool overwrite){
       if (overwrite && File.Exists(_path)){
         File.WriteAllText(_path, string.Empty); // очищаем файл

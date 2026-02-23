@@ -1,15 +1,6 @@
 ﻿using ConsoleTables;
 using ExcelDataReader;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace C_Sharp_var_10{
   public static class DatabaseController {
@@ -58,9 +49,7 @@ namespace C_Sharp_var_10{
           var productTable = result.Tables["Товар"];
           if (productTable != null){
             for (int i = 1; i < productTable.Rows.Count; i++){ // Пропускаем заголовок
-
-              products.Add(new Product
-              (
+              products.Add(new Product (
                 Convert.ToUInt32(productTable.Rows[i][0]),
                 productTable.Rows[i][1].ToString(),
                 productTable.Rows[i][2].ToString(),
@@ -75,8 +64,7 @@ namespace C_Sharp_var_10{
           var shopTable = result.Tables["Магазин"];
           if (shopTable != null) { 
             for (int i = 1; i < shopTable.Rows.Count; i++){  // Пропускаем заголовок
-              shops.Add(new Shop
-              (
+              shops.Add(new Shop (
                 shopTable.Rows[i][0].ToString(),
                 shopTable.Rows[i][1].ToString(),
                 shopTable.Rows[i][2].ToString()
@@ -88,8 +76,7 @@ namespace C_Sharp_var_10{
           var productMovementTable = result.Tables["Движение товаров"];
           if (productMovementTable != null){
             for (int i = 1; i < productMovementTable.Rows.Count; i++){ // Пропускаем заголовок
-              productMovements.Add(new ProductMovement
-              (
+              productMovements.Add(new ProductMovement (
                 Convert.ToUInt32(productMovementTable.Rows[i][0]),
                 productMovementTable.Rows[i][1].ToString(),
                 productMovementTable.Rows[i][2].ToString(),
@@ -105,7 +92,6 @@ namespace C_Sharp_var_10{
       Logger.Log("База данных успешно прочитана");
     }
 
-        
       // Вывод таблицы товаров
     public static void PrintProducts(List<Product> products) {
       if (products.Count == 0) {
@@ -122,7 +108,6 @@ namespace C_Sharp_var_10{
 
       table.Write();
       Console.WriteLine();
-
       Logger.Log("Таблица 'Товар' выведена на экран");
     }
 
@@ -156,7 +141,8 @@ namespace C_Sharp_var_10{
 
       var table = new ConsoleTable("ID операции", "Дата", "ID магазина", "Артикул", "Количество упаковок, шт.", "Тип операции");
       foreach (var productMovement in productMovements) {
-        table.AddRow(productMovement.OperationId, productMovement.Date, productMovement.ShopId, productMovement.ProductArticle, productMovement.PackageCount, productMovement.OperationType);
+        table.AddRow(productMovement.OperationId, productMovement.Date, productMovement.ShopId, 
+                     productMovement.ProductArticle, productMovement.PackageCount, productMovement.OperationType);
       }
       table.Write();
       Console.WriteLine();
@@ -277,15 +263,11 @@ namespace C_Sharp_var_10{
       try {
         Console.Write("Введите район магазина: ");
         district = Console.ReadLine();
-        if (string.IsNullOrEmpty(district)) {
-          throw new Exception();
-        }
+        if (string.IsNullOrEmpty(district)) throw new Exception();
 
         Console.Write("Введите адрес магазина: ");
         address = Console.ReadLine();
-        if (string.IsNullOrEmpty(address)) {
-          throw new Exception();
-        }
+        if (string.IsNullOrEmpty(address)) throw new Exception();
       }
       catch {
         Console.WriteLine("Неправильно введены данные о магазине.");
@@ -324,32 +306,20 @@ namespace C_Sharp_var_10{
 
         Console.Write("Введите ID магазина движения товаров (начинается с 'M' английского алфавита): ");
         shopId = Console.ReadLine();
-        if (string.IsNullOrEmpty(shopId) || shops.Find(x => x.Id == shopId) == null)
-
-            throw new Exception();
+        if (string.IsNullOrEmpty(shopId) || shops.Find(x => x.Id == shopId) == null) throw new Exception();
                 
-
         Console.Write("Введите артикул товара движения товаров: ");
         productArticle = Convert.ToUInt32(Console.ReadLine());
-        if (products.Find(x => x.Article == productArticle) == null) 
-                 
-            throw new Exception();
+        if (products.Find(x => x.Article == productArticle) == null) throw new Exception();
                 
-
         Console.Write("Введите кол-во упаковок движения товаров: ");
         packageCount = Convert.ToUInt32(Console.ReadLine());
-        if (packageCount == 0)
+        if (packageCount == 0) throw new Exception();
                 
-            throw new Exception();
-                
-
         Console.Write("Введите тип операции движения товаров (Продажа/Поступление): ");
         string operationTypeString = Console.ReadLine().ToLower().Trim();
         if (string.IsNullOrEmpty(operationTypeString) || 
-            (operationTypeString != "продажа" && operationTypeString != "поступление")) 
-                
-            throw new Exception();
-                
+           (operationTypeString != "продажа" && operationTypeString != "поступление")) throw new Exception();         
         operationType = operationTypeString == "продажа" ? "Продажа" : "Поступление";
       }
       catch{
@@ -380,33 +350,24 @@ namespace C_Sharp_var_10{
       try {
         Console.Write("Введите отдел товара: ");
         department = Console.ReadLine();
-        if (string.IsNullOrEmpty(department)) {
-          throw new Exception();
-        }
+        if (string.IsNullOrEmpty(department)) throw new Exception();
 
         Console.Write("Введите название товара: ");
         name = Console.ReadLine();
-        if (string.IsNullOrEmpty(name)) {
-          throw new Exception();
-        }
-                
+        if (string.IsNullOrEmpty(name)) throw new Exception();
+
         Console.Write("Введите единицу измерения товара: ");
         unit = Console.ReadLine();
-        if (string.IsNullOrEmpty(unit)) {
-          throw new Exception();
-        }
-
+        if (string.IsNullOrEmpty(unit)) throw new Exception();
+        
         Console.Write("Введите кол-во в упаковке товара: ");
         itemsPerPackage = Convert.ToUInt32(Console.ReadLine());
-        if (itemsPerPackage == 0) {
-          throw new Exception();
-        }
-
+        if (itemsPerPackage == 0) throw new Exception();
+       
         Console.Write("Введите цену за упаковку товара: ");
         price = Convert.ToUInt32(Console.ReadLine());
-        if (price == 0) {
-          throw new Exception();
-        }
+        if (price == 0) throw new Exception();
+        
       }
       catch {
         Console.WriteLine("Неправильно введены данные о товаре.");
@@ -434,15 +395,11 @@ namespace C_Sharp_var_10{
       try {
         Console.Write("Введите район магазина: ");
         district = Console.ReadLine();
-        if (string.IsNullOrEmpty(district)) {
-          throw new Exception();
-        }
+        if (string.IsNullOrEmpty(district)) throw new Exception();
 
         Console.Write("Введите адрес магазина: ");
         address = Console.ReadLine();
-        if (string.IsNullOrEmpty(address)) {
-          throw new Exception();
-        }
+        if (string.IsNullOrEmpty(address)) throw new Exception();
       }
       catch {
         Console.WriteLine("Неправильно введены данные о магазине.");
@@ -479,28 +436,21 @@ namespace C_Sharp_var_10{
 
         Console.Write("Введите ID магазина движения товаров (начинается с 'M' английского алфавита): ");
         shopId = Console.ReadLine();
-        if (string.IsNullOrEmpty(shopId) || shops.Find(x => x.Id == shopId) == null) {
-          throw new Exception();
-        }
-
+        if (string.IsNullOrEmpty(shopId) || shops.Find(x => x.Id == shopId) == null) throw new Exception();
+       
         Console.Write("Введите артикул товара движения товаров: ");
         productArticle = Convert.ToUInt32(Console.ReadLine());
-        if (products.Find(x => x.Article == productArticle) == null) {
-          throw new Exception();
-        }
-
+        if (products.Find(x => x.Article == productArticle) == null) throw new Exception();
+       
         Console.Write("Введите кол-во упаковок движения товаров: ");
         packageCount = Convert.ToUInt32(Console.ReadLine());
-        if (packageCount == 0) {
-          throw new Exception();
-        }
-
+        if (packageCount == 0) throw new Exception();
+        
         Console.Write("Введите тип операции движения товаров (Продажа/Поступление): ");
         string operationTypeString = Console.ReadLine().ToLower().Trim();
-        if (string.IsNullOrEmpty(operationTypeString) || (operationTypeString != "продажа" && operationTypeString != "поступление")) {
-          throw new Exception();
-        }
-        operationType = operationTypeString == "продажа" ? "Продажа" : "Поступление";
+        if (string.IsNullOrEmpty(operationTypeString) || 
+           (operationTypeString != "продажа" && operationTypeString != "поступление")) throw new Exception();
+            operationType = operationTypeString == "продажа" ? "Продажа" : "Поступление";
       }
       catch {
         Console.WriteLine("Неправильно введены данные о движении товаров.");
@@ -518,9 +468,7 @@ namespace C_Sharp_var_10{
     // Нахождение максимальной цены упаковки среди всех продуктов
     // 1 таблица, 1 число
     public static uint GetMaxProductPrice(List<Product> products){
-      if (products == null || products.Count == 0) {
-        return 0;
-      }
+      if (products == null || products.Count == 0) return 0;
 
       return products.Max(p => p.Price);
     }
@@ -528,32 +476,37 @@ namespace C_Sharp_var_10{
     // Нахождение списка операций с товарами определённого отдела
     // 2 таблицы, список строк
     public static List<string> GetDepartmentOperations(List<Product> products,List<ProductMovement> productMovements,string department) {
-      if (products == null || productMovements == null ||products.Count == 0 || productMovements.Count == 0)
-      {
-        return ["пусто"];
-      }
-
-      return (from pm in productMovements join p in products on pm.ProductArticle equals p.Article where p.Department == department select $"[{pm.Date}] {pm.OperationType}: {p.Name} — {pm.PackageCount} уп.").ToList();
+      if (products == null || productMovements == null ||
+          products.Count == 0 || productMovements.Count == 0) 
+            return ["пусто"];
+          
+      return (from pm in productMovements join p in products on pm.ProductArticle equals p.Article where p.Department == 
+              department select $"[{pm.Date}] {pm.OperationType}: {p.Name} — {pm.PackageCount} уп.").ToList();
     }
 
     // Нахождение адресов магазинов, в которых когда-либо продавался товар с названием productName
     // 3 таблицы, список строк
-    public static List<string> FindShopAddressesWhereProductWasSold(List<Product> products, List<Shop> shops, List<ProductMovement> productMovements, string productName) {
-      if (products == null || shops == null || productMovements == null || products.Count == 0 || shops.Count == 0 || productMovements.Count == 0) {
-        return ["пусто"];
-      }
-
-      return (from pm in productMovements join p in products on pm.ProductArticle equals p.Article join s in shops on pm.ShopId equals s.Id where pm.OperationType == "Продажа" && p.Name == productName select s.Address).Distinct().ToList();
+    public static List<string> FindShopAddressesWhereProductWasSold(List<Product> products, List<Shop> shops, 
+                                                                    List<ProductMovement> productMovements, string productName) {
+      if (products == null || shops == null || productMovements == null || 
+          products.Count == 0 || shops.Count == 0 || productMovements.Count == 0) 
+            return ["пусто"];
+      
+      return (from pm in productMovements join p in products on pm.ProductArticle 
+              equals p.Article join s in shops on pm.ShopId equals s.Id where pm.OperationType == 
+              "Продажа" && p.Name == productName select s.Address).Distinct().ToList();
     }
 
     // Нахождение общей суммы продаж
     // 3 таблицы, 1 число
     public static int GetTotalDistrictRevenue(List<Product> products, List<Shop> shops, List<ProductMovement> productMovements,string shopDistrict) {
-      if (products == null || shops == null || productMovements == null ||products.Count == 0 || shops.Count == 0 || productMovements.Count == 0) {
-        return 0;
-      }
-
-      return (from pm in productMovements join p in products on pm.ProductArticle equals p.Article join s in shops on pm.ShopId equals s.Id where s.District == shopDistrict && pm.OperationType == "Продажа" select (int)p.Price * (int)pm.PackageCount).Sum();
+      if (products == null || shops == null || productMovements == null ||
+          products.Count == 0 || shops.Count == 0 || productMovements.Count == 0) 
+            return 0;
+      
+      return (from pm in productMovements join p in products on pm.ProductArticle 
+              equals p.Article join s in shops on pm.ShopId equals s.Id where s.District == shopDistrict && pm.OperationType == 
+              "Продажа" select (int)p.Price * (int)pm.PackageCount).Sum();
     }
   }
 }

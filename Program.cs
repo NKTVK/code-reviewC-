@@ -1,6 +1,4 @@
-﻿using ExcelDataReader;
-using ConsoleTables;
-using C_Sharp_var_10;
+﻿using C_Sharp_var_10;
 
 public class Program {
   public static void Main(string[] args) {
@@ -189,10 +187,7 @@ public class Program {
               Console.Write("Введите ключ: ");
               try {
                 uint key = Convert.ToUInt32(Console.ReadLine());
-                if (key == 0) {
-                    throw new Exception();
-                }
-
+                if (key == 0) throw new Exception();
                 DatabaseController.UpdateProduct(products, key);
               }
               catch {
@@ -205,7 +200,9 @@ public class Program {
             case "2": {
               Console.Write("Введите ключ (начинается с 'M' английского алфавита): ");
               try {
-                string key = Console.ReadLine(); if (string.IsNullOrEmpty(key))throw new Exception();DatabaseController.UpdateShop(shops, key);
+                string key = Console.ReadLine();
+                if (string.IsNullOrEmpty(key)) throw new Exception();
+                DatabaseController.UpdateShop(shops, key);
               }
               catch {
                 Console.WriteLine("Некорректно введён ключ.");
@@ -217,7 +214,9 @@ public class Program {
             case "3": {
               Console.Write("Введите ключ: ");
               try {
-                uint key = Convert.ToUInt32(Console.ReadLine()); if (key == 0)throw new Exception();DatabaseController.UpdateProductMovement(products, shops, productMovements, key);
+                uint key = Convert.ToUInt32(Console.ReadLine());
+                if (key == 0) throw new Exception();
+                DatabaseController.UpdateProductMovement(products, shops, productMovements, key);
               }
               catch {
                 Console.WriteLine("Некорректно введён ключ.");
@@ -301,9 +300,8 @@ public class Program {
               string department;
               Console.Write("Введите название отдела: ");
               try {
-                department = Console.ReadLine();if (string.IsNullOrEmpty(department)) {
-                    throw new Exception();
-                }
+                department = Console.ReadLine();
+                if (string.IsNullOrEmpty(department)) throw new Exception();
               }
               catch {
                 Console.WriteLine("Неправильно введено название отдела.");
@@ -350,14 +348,16 @@ public class Program {
               Logger.Log($"Список адресов магазинов, в которых " + $"продавался товар {productName} выведен на экран");
               break;
             }
+
             case "4": {
-                // Найти общую сумму продаж в определённом районе
-                // 3 таблица, 1 число
+              // Найти общую сумму продаж в определённом районе
+              // 3 таблица, 1 число
 
               string district;
               Console.Write("Введите название района: ");
               try {
-                district = Console.ReadLine();if (string.IsNullOrEmpty(district)) throw new Exception();                   
+                district = Console.ReadLine(); 
+                if (string.IsNullOrEmpty(district)) throw new Exception();                   
               }
               catch {
                 Console.WriteLine("Неверно введены данные о районе.");
@@ -375,15 +375,17 @@ public class Program {
               Logger.Log($"Общая сумма продаж равная {sum} выведена на экран");
               break;
             }
+
             default: {
               Console.WriteLine("Данной опции не существует.");
               Logger.Log("Введена несуществующая опция");
               break;
             }
-            }
+            } 
+
             Console.WriteLine();
             break;
-          }
+            }
 
         default: {
           Console.WriteLine("Данной опции не существует.");

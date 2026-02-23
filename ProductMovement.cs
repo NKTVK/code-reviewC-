@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace C_Sharp_var_10 {
   public class ProductMovement {
-    public uint OperationId;      //  ID операции
-    public DateOnly Date;         //  Дата
-    public string ShopId;         //  ID магазина
-    public uint ProductArticle;   //  Артикул товара
-    public uint PackageCount;     //  Количество упаковок, шт
-    public string OperationType;  //  Тип операции
+    public uint OperationId { get; set; }      //  ID операции
+    public DateOnly Date { get; set; }         //  Дата
+    public string ShopId { get; set; }         //  ID магазина
+    public uint ProductArticle { get; set; }  //  Артикул товара
+    public uint PackageCount { get; set; }     //  Количество упаковок, шт
+    public string OperationType { get; set; }  //  Тип операции
 
         
 
@@ -66,7 +60,9 @@ namespace C_Sharp_var_10 {
     }
 
     public override string ToString(){
-      return $"ID операции: {OperationId},\tДата: {Date},\t" + $"ID магазина: {ShopId},\tАртикул: {ProductArticle},\t" + $"Количество упаковок: {PackageCount},\tТип операции: {OperationType}";
+      return $"ID операции: {OperationId},\tДата: {Date},\t" + 
+             $"ID магазина: {ShopId},\tАртикул: {ProductArticle},\t" + 
+             $"Количество упаковок: {PackageCount},\tТип операции: {OperationType}";
     }
   }
 }

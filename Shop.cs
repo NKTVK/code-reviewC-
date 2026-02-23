@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace C_Sharp_var_10 {
+﻿namespace C_Sharp_var_10 {
   public class Shop {
-    public string Id;         //  ID магазина
-    public string District;   //  Район
-    public string Address;    //  Адрес
+    public string Id { get; set; }        //  ID магазина
+    public string District { get; set; }   //  Район
+    public string Address { get; set; }    //  Адрес
 
     public Shop() {
       Id = "не задано";
